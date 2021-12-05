@@ -17,10 +17,9 @@ public class Semaphore {
             System.out.println(message);
             wait();
         } else {
-
             for (int i = 0; i < Network.devices.size(); i++) {
                 if (Network.devices.get(i).getName().equals(name)) {
-                    message = name + " ( " + Network.devices.get(i).getType() + " )" + " Arrived";
+                    message = name + " ("+ Network.devices.get(i).getType() +")" + " Arrived";
                     break;
                 }
             }
@@ -34,7 +33,7 @@ public class Semaphore {
         bound++;
         if (bound <= 0)
             notify();
-        String message = "- Connection " + /*connection number +*/ ": " + name + " Logged out";
+        String message = "- Connection " + bound +": " + name + " Logged out";
         System.out.println(message);
     }
 

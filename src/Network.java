@@ -11,8 +11,7 @@ public class Network {
 
 
 
-    public static void main(String[] args){
-
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("What is the number of WI-FI Connections?");
         numberOfConnections=input.nextInt();
         System.out.println("What is the number of devices Clients want to connect?");
@@ -26,6 +25,9 @@ public class Network {
             Device deviceDummy=new Device(name,type);
             devices.add(deviceDummy);
         }
+        Router r=new Router();
+        r.connect();
+
 
     }
 }

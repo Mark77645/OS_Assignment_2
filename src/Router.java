@@ -21,6 +21,22 @@ public class Router implements Runnable {
 
     @Override
     public void run() {
-
+        //what will be done when a thread runs.
+        try{
+            semaphore.reserve(Thread.currentThread().getName());
+            String nameOfTheDevice= Thread.currentThread().getName();
+            int index=0;
+            for (int i=1;i<Network.numberOfConnections;i++){
+                index=i;
+            }
+            String message= "Connection "+ index +  ": "+ nameOfTheDevice +" occupied.";
+            System.out.println(message);
+            message= "Connection "+ index +  ": "+ nameOfTheDevice +" Performs online activity.";
+            System.out.println(message);
+            Thread.sleep(1000);
+            /////////
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
