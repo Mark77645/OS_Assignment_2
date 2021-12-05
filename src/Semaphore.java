@@ -3,35 +3,33 @@ public class Semaphore {
     public Semaphore(int bound) {
         this.bound = bound;
     }
-    //To reserve a place in "bound"
+    //To reserve a place in the "bound"
     public synchronized void reserve(String name) throws InterruptedException {
         bound--;
+        String message="";
         if (bound < 0) {
-            int g = 0;
-            String out="";
             for (int i = 0; i < Network.devices.size(); i++) {
                 if (Network.devices.get(i).getName().equals(name)) {
-                    out = name + " ( " + Network.devices.get(i).getType() + " )" + " Arrived and waiting";
+                    message = name + " ( " + Network.devices.get(i).getType() + " )" + " Arrived and waiting";
                     break;
                 }
             }
-            System.out.println(out);
+            System.out.println(message);
             wait();
         } else {
-            int g = 0;
-            String out = "";
 
             for (int i = 0; i < Network.devices.size(); i++) {
                 if (Network.devices.get(i).getName().equals(name)) {
-                    out = name + " ( " + Network.devices.get(i).getType() + " )" + " Arrived";
+                    message = name + " ( " + Network.devices.get(i).getType() + " )" + " Arrived";
                     break;
                 }
             }
-            System.out.println(out);
-
+            System.out.println(message);
         }
 
     }
+    //To release a place from the "bound"
+
     public synchronized void release(String name){
         bound++;
         if (bound <= 0)
