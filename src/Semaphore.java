@@ -34,8 +34,8 @@ public class Semaphore {
         bound++;
         if (bound <= 0)
             notify();
-        String out = "- Connection " + /*connection number +*/ ": " + name + " Logged out";
-        System.out.println(out);
+        String message = "- Connection " + /*connection number +*/ ": " + name + " Logged out";
+        System.out.println(message);
     }
 
 }
