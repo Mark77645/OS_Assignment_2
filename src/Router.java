@@ -26,15 +26,16 @@ public class Router implements Runnable {
             semaphore.reserve(Thread.currentThread().getName());
             String nameOfTheDevice= Thread.currentThread().getName();
             int index=0;
-            for (int i=1;i<Network.numberOfConnections;i++){
-                index=i;
-            }
-            String message= "Connection "+ index +  ": "+ nameOfTheDevice +" occupied.";
-            System.out.println(message);
-            message= "Connection "+ index +  ": "+ nameOfTheDevice +" Performs online activity.";
+            String message= "Connection "+ Network.numberOfConnections +  ": "+ nameOfTheDevice +" occupied.";
             System.out.println(message);
             Thread.sleep(1000);
-            /////////
+            message="Connection "+ Network.numberOfConnections +  ": "+ nameOfTheDevice +" Login.";
+            System.out.println(message);
+            message= "Connection "+ Network.numberOfConnections +  ": "+ nameOfTheDevice +" Performs online activity.";
+            System.out.println(message);
+            Thread.sleep(5000);
+            semaphore.release(Thread.currentThread().getName());
+            Thread.currentThread().stop();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
