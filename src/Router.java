@@ -1,7 +1,14 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Router implements Runnable {
     public Semaphore semaphore;
 
-    public Router() {
+
+    public int conncetionNumber=0;
+
+    public Router() throws IOException {
         semaphore = new Semaphore(Network.numberOfConnections); //initialize the bound.
     }
 
@@ -9,10 +16,13 @@ public class Router implements Runnable {
         //For each device there is a thread for it.
         for (int i = 0; i < Network.devices.size(); i++) {
             Thread t = new Thread(this, Network.devices.get(i).getName());
+            conncetionNumber=i;
             t.start();
         }
 
+
     }
+
 
 
 
@@ -25,18 +35,18 @@ public class Router implements Runnable {
         try{
             semaphore.reserve(Thread.currentThread().getName());
             String nameOfTheDevice= Thread.currentThread().getName();
-            int index=0;
-            String message= "Connection "+ Network.numberOfConnections +  ": "+ nameOfTheDevice +" occupied.";
-            System.out.println(message);
+
+            String message= "Connection " + ": "+ nameOfTheDevice +" occupied.";
+            System.out.println(message+"\n");
             Thread.sleep(1000);
-            message="Connection "+ Network.numberOfConnections +  ": "+ nameOfTheDevice +" Login.";
-            System.out.println(message);
-            message= "Connection "+ Network.numberOfConnections +  ": "+ nameOfTheDevice +" Performs online activity.";
-            System.out.println(message);
+            message="Connection "  +  ": "+ nameOfTheDevice +" Login.";
+            System.out.println(message+"\n");
+            message= "Connection "  +  ": "+ nameOfTheDevice +" Performs online activity.";
+            System.out.println(message+"\n");
             Thread.sleep(5000);
             semaphore.release(Thread.currentThread().getName());
             Thread.currentThread().stop();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
     }
